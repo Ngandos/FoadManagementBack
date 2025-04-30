@@ -10,6 +10,7 @@ public record FormationCreateDTO(
     String niveau,
     UUID formateurUuid,
     UUID finalCertifUuid,
+    UUID prerequisCertifUuid,
     List<UUID> etudiantsUuids
 
 ) {

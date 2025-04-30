@@ -8,7 +8,7 @@ public record CertificationDTO(
 
     UUID uuid,
     String nom,
-    NiveauRncp niveauRncp
+    NiveauRncp nivRncp
 
 ) {
 }

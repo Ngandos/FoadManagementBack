@@ -3,13 +3,14 @@ package com.formation.foadmanagementback.Controllers;
 import com.formation.foadmanagementback.DTO.Formation.FormationCreateDTO;
 import com.formation.foadmanagementback.DTO.Formation.FormationDTO;
 import com.formation.foadmanagementback.Services.Abstracts.IFormationsServ;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/formations")
+@RequestMapping("/formations")
 public class FormationController {
 
     private final IFormationsServ iFormationsServ;
@@ -29,6 +30,7 @@ public class FormationController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'FORMATEUR')")
     public FormationDTO create(@RequestBody FormationCreateDTO dto) {
         return iFormationsServ.createFormation(dto);
     }

@@ -3,25 +3,27 @@ package com.formation.foadmanagementback.Services.Implements;
 import com.formation.foadmanagementback.DTO.Etudiant.EtudiantCreateDTO;
 import com.formation.foadmanagementback.DTO.Etudiant.EtudiantDTO;
 import com.formation.foadmanagementback.Entities.Etudiant;
-import com.formation.foadmanagementback.Mappers.EtudiantMapper;
+import com.formation.foadmanagementback.Mappers.IEtudiantMapper;
 import com.formation.foadmanagementback.Repositories.IEtudiantsRepository;
 import com.formation.foadmanagementback.Services.Abstracts.IEtudiantsServ;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
+@RequiredArgsConstructor
 public class EtudiantsServImplements implements IEtudiantsServ {
 
     private final IEtudiantsRepository iEtudiantsRepository;
+    private final IEtudiantMapper iEtudiantMapper;
 
-    public EtudiantsServImplements(IEtudiantsRepository iEtudiantsRepository) {
-        this.iEtudiantsRepository = iEtudiantsRepository;
-    }
 
     @Override
     public List<EtudiantDTO> getAllEtudiants() {
         return iEtudiantsRepository.findAll().stream()
-            .map(EtudiantMapper::toDTO)
+            .map(iEtudiantMapper::toDTO)
             .toList();
     }
 
@@ -29,13 +31,13 @@ public class EtudiantsServImplements implements IEtudiantsServ {
     public EtudiantDTO getEtudiantByUuid(UUID uuid) {
         Etudiant etudiant = iEtudiantsRepository.findByUuid(uuid)
         .orElseThrow(() -> new RuntimeException("Étudiant non trouvé"));
-        return EtudiantMapper.toDTO(etudiant);
+        return iEtudiantMapper.toDTO(etudiant);
     }
 
     @Override
     public EtudiantDTO createEtudiant(EtudiantCreateDTO dto) {
-        Etudiant etudiant = EtudiantMapper.toEntity(dto);
+        Etudiant etudiant = iEtudiantMapper.toEntity(dto);
         Etudiant saved = iEtudiantsRepository.save(etudiant);
-        return EtudiantMapper.toDTO(saved);
+        return iEtudiantMapper.toDTO(saved);
     }
 }

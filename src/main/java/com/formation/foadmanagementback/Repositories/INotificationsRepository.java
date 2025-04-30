@@ -11,6 +11,16 @@ public interface INotificationsRepository extends JpaRepository<Notification, Lo
 
     Optional<Notification> findByUuid(UUID uuid);
 
-    List<Notification> findByDestinataireUuid(UUID destinataireUuid);
+    List<Notification> findByDestinataireEtudiant_Uuid(UUID destinataireUuid);
+
+    List<Notification> findByDestinataireFormateur_Uuid(UUID destinataireUuid);
+
+    List<Notification> findByDestinataireEtudiant_UuidAndLuFalse(UUID uuid);
+
+    List<Notification> findTop5ByDestinataireEtudiant_UuidOrderByDateEnvoiDesc(UUID uuid);
+
+    List<Notification> findByDestinataireFormateur_UuidAndLuFalse(UUID uuid);
+
+    List<Notification> findTop5ByDestinataireFormateur_UuidOrderByDateEnvoiDesc(UUID uuid);
 
 }

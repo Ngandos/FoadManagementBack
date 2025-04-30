@@ -5,7 +5,7 @@ import com.formation.foadmanagementback.DTO.Session.SessionDTO;
 import com.formation.foadmanagementback.Entities.Etudiant;
 import com.formation.foadmanagementback.Entities.Formation;
 import com.formation.foadmanagementback.Entities.Session;
-import com.formation.foadmanagementback.Mappers.SessionMapper;
+import com.formation.foadmanagementback.Mappers.ISessionMapper;
 import com.formation.foadmanagementback.Repositories.IEtudiantsRepository;
 import com.formation.foadmanagementback.Repositories.IFormationsRepository;
 import com.formation.foadmanagementback.Repositories.ISessionsRepository;
@@ -27,14 +27,14 @@ public class SessionsServImplements implements ISessionsServ {
     @Override
     public List<SessionDTO> getAllSessions() {
         return iSessionsRepository.findAll().stream()
-            .map(SessionMapper::toDTO)
+            .map(ISessionMapper::toDTO)
             .toList();
     }
 
     @Override
     public SessionDTO getSessionByUuid(UUID uuid) {
         return iSessionsRepository.findByUuid(uuid)
-            .map(SessionMapper::toDTO)
+            .map(ISessionMapper::toDTO)
             .orElseThrow(() -> new RuntimeException("Session non trouvée"));
     }
 
@@ -48,7 +48,7 @@ public class SessionsServImplements implements ISessionsServ {
             .orElseThrow(() -> new RuntimeException("Étudiant non trouvé pour uuid : " + uuid)))
             .toList();
 
-        Session session = SessionMapper.toEntity(dto, formation, etudiants);
-        return SessionMapper.toDTO(iSessionsRepository.save(session));
+        Session session = ISessionMapper.toEntity(dto, formation, etudiants);
+        return ISessionMapper.toDTO(iSessionsRepository.save(session));
     }
 }

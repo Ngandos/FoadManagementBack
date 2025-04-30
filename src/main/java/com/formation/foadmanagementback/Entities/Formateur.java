@@ -23,8 +23,12 @@ public class Formateur {
       private String prenom;
       private String email;
       private String expertise;
+      @OneToOne
+      @JoinColumn(name = "user_id")
+      private User user;
 
-      @PrePersist
+
+    @PrePersist
       public void generateUuid() {
             if (uuid == null) {
                 uuid = UUID.randomUUID();

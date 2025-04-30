@@ -1,5 +1,6 @@
 package com.formation.foadmanagementback.Entities;
 
+import com.formation.foadmanagementback.Enums.NiveauRncp;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +23,9 @@ public class Certification {
     private UUID uuid;
     private String nom;
     @Enumerated(EnumType.STRING)
-    private String nivRncp;
+    @Column(nullable = false)
+    private NiveauRncp nivRncp;
+
     @PrePersist
     public void generateUuid() {
         if (uuid == null) {

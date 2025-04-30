@@ -28,6 +28,9 @@ public class Session {
     @ManyToOne
     @JoinColumn(name = "formation_id")
     private Formation formation;
+    @ManyToOne
+    @JoinColumn(name = "formateur_id")
+    private Formateur formateur;
     @ManyToMany
     @JoinTable(
         name = "session_etudiants",

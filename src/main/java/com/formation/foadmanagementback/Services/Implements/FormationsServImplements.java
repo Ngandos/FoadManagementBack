@@ -6,7 +6,7 @@ import com.formation.foadmanagementback.Entities.Certification;
 import com.formation.foadmanagementback.Entities.Etudiant;
 import com.formation.foadmanagementback.Entities.Formateur;
 import com.formation.foadmanagementback.Entities.Formation;
-import com.formation.foadmanagementback.Mappers.FormationMapper;
+import com.formation.foadmanagementback.Mappers.IFormationMapper;
 import com.formation.foadmanagementback.Repositories.ICertificationsRepository;
 import com.formation.foadmanagementback.Repositories.IEtudiantsRepository;
 import com.formation.foadmanagementback.Repositories.IFormateursRepository;
@@ -30,14 +30,14 @@ public class FormationsServImplements implements IFormationsServ {
     @Override
     public List<FormationDTO> getAllFormations() {
         return iFormationsRepository.findAll().stream()
-            .map(FormationMapper::toDTO)
+            .map(IFormationMapper::toDTO)
             .toList();
     }
 
     @Override
     public FormationDTO getFormationByUuid(UUID uuid) {
         return iFormationsRepository.findByUuid(uuid)
-            .map(FormationMapper::toDTO)
+            .map(IFormationMapper::toDTO)
             .orElseThrow(() -> new RuntimeException("Formation non trouvée"));
     }
 
@@ -57,8 +57,8 @@ public class FormationsServImplements implements IFormationsServ {
             .orElseThrow(() -> new RuntimeException("Étudiant non trouvé pour uuid : " + uuid)))
             .toList();
 
-        Formation formation = FormationMapper.toEntity(dto, formateur, finalCertif, prerequisCertif, etudiants);
+        Formation formation = IFormationMapper.toEntity(dto, formateur, finalCertif, prerequisCertif, etudiants);
         Formation saved = iFormationsRepository.save(formation);
-        return FormationMapper.toDTO(saved);
+        return IFormationMapper.toDTO(saved);
     }
 }

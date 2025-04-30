@@ -5,7 +5,7 @@ import com.formation.foadmanagementback.Enums.NiveauRncp;
 public record CertificationCreateDTO(
 
     String nom,
-    NiveauRncp niveauRncp
+    NiveauRncp nivRncp
 
 ) {
 }

@@ -1,7 +1,7 @@
 package com.formation.foadmanagementback.Services.Abstracts;
 
-import com.formation.foadmanagementback.DTO.RemiseDevoirDTO.RemiseDevoirCreateDTO;
-import com.formation.foadmanagementback.DTO.RemiseDevoirDTO.RemiseDevoirDTO;
+import com.formation.foadmanagementback.DTO.RemiseDevoir.RemiseDevoirCreateDTO;
+import com.formation.foadmanagementback.DTO.RemiseDevoir.RemiseDevoirDTO;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,5 +12,7 @@ public interface IRemisesDevoirsServ {
     RemiseDevoirDTO getByUuid(UUID uuid);
     List<RemiseDevoirDTO> getByEtudiant(UUID etudiantUuid);
     List<RemiseDevoirDTO> getByDevoir(UUID devoirUuid);
+    RemiseDevoirDTO rendreDevoir(RemiseDevoirCreateDTO dto);
+
 
 }

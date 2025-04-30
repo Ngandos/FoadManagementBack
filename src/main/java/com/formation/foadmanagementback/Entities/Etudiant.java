@@ -26,6 +26,9 @@ public class Etudiant {
     @Column(unique = true, nullable = false)
     private String email;
     private String telephone;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @PrePersist
     public void generateUuid() {

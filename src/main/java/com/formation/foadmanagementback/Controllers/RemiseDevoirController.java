@@ -1,9 +1,10 @@
 package com.formation.foadmanagementback.Controllers;
 
-import com.formation.foadmanagementback.DTO.RemiseDevoirDTO.RemiseDevoirCreateDTO;
-import com.formation.foadmanagementback.DTO.RemiseDevoirDTO.RemiseDevoirDTO;
+import com.formation.foadmanagementback.DTO.RemiseDevoir.RemiseDevoirCreateDTO;
+import com.formation.foadmanagementback.DTO.RemiseDevoir.RemiseDevoirDTO;
 import com.formation.foadmanagementback.Services.Abstracts.IRemisesDevoirsServ;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class RemiseDevoirController {
     private final IRemisesDevoirsServ iRemisesDevoirsServ;
 
     @PostMapping
+    @PreAuthorize("hasRole('ETUDIANT')")
     public RemiseDevoirDTO create(@RequestBody RemiseDevoirCreateDTO dto) {
         return iRemisesDevoirsServ.create(dto);
     }

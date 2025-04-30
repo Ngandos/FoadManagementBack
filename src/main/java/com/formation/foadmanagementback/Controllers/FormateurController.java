@@ -2,12 +2,14 @@ package com.formation.foadmanagementback.Controllers;
 
 import com.formation.foadmanagementback.Entities.Formateur;
 import com.formation.foadmanagementback.Repositories.IFormateursRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/formateurs")
+@SecurityRequirement(name = "BearerAuth")
 public class FormateurController {
 
     public final IFormateursRepository formateursRepository;

@@ -9,7 +9,9 @@ public record NotificationDTO(
     String message,
     LocalDateTime dateEnvoi,
     boolean lu,
-    UUID destinataireUuid
+    UUID destinataireEtudiantUuid,
+    UUID destinataireFormateurUuid,
+    UUID destinataireUserUuid
 
 ) {
 }

@@ -1,0 +1,33 @@
+server:
+   port: 8080
+   servlet:
+      context-path: /FOAD
+
+spring:
+   datasource:
+      url: jdbc:postgresql://localhost:5432/foaddata
+      username: postgres
+      password: password
+      driver-class-name: org.postgresql.Driver
+   flyway:
+      baseline-on-migrate: true
+
+   jpa:
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+         ddl-auto: update
+      properties:
+         hibernate:
+            format_sql: true
+            show_sql: true
+
+springdoc:
+   api-docs:
+      path: /api-docs
+   swagger-ui:
+      path: /swagger-ui.html
+
+jwt:
+   secret: c29tZXZlcnlzZWN1cmVzaWduYXR1cmVrZXkzMDAwMA== # base64 encoded 32+ bytes
+   expiration: 86400000 # 1 jour

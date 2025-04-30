@@ -5,6 +5,12 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
+@Setter
+@Builder
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "remises_devoirs")
 public class RemiseDevoir {
 

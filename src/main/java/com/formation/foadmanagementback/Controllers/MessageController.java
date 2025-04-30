@@ -3,7 +3,9 @@ package com.formation.foadmanagementback.Controllers;
 import com.formation.foadmanagementback.DTO.Message.MessageCreateDTO;
 import com.formation.foadmanagementback.DTO.Message.MessageDTO;
 import com.formation.foadmanagementback.Services.Abstracts.IMessageService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,11 +14,13 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/messages")
+@SecurityRequirement(name = "BearerAuth")
 public class MessageController {
 
     private final IMessageService iMessageService;
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'FORMATEUR')")
     public MessageDTO sendMessage(@RequestBody MessageCreateDTO dto) {
         return iMessageService.sendMessage(dto);
     }

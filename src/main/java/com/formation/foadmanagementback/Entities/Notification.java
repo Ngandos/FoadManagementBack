@@ -29,7 +29,14 @@ public class Notification {
     private boolean lu;
     @ManyToOne
     @JoinColumn(name = "destinataire_id")
-    private Etudiant destinataire;
+    private Etudiant destinataireEtudiant;
+    @ManyToOne
+    @JoinColumn(name = "formateur_id")
+    private Formateur destinataireFormateur;
+    @ManyToOne
+    @JoinColumn(name = "destinataire_user_id")
+    private User destinataireUser;
+
 
     @PrePersist
     public void generateUuidAndDate() {
