@@ -12,7 +12,10 @@ public interface IMessagesRepository extends JpaRepository<Message, Long> {
     Optional<Message> findByUuid(UUID uuid);
 
     List<Message> findByExpediteurUuid(UUID expediteurUuid);
+
     List<Message> findByDestinataireUuid(UUID destinataireUuid);
+
     List<Message> findByExpediteurUuidAndDestinataireUuid(UUID expediteurUuid, UUID destinataireUuid);
 
+    List<Message> findByDestinataireUuidAndLuFalse(UUID destinataireUuid);
 }

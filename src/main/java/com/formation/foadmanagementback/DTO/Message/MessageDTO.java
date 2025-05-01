@@ -6,11 +6,11 @@ import java.util.UUID;
 public record MessageDTO(
 
     UUID uuid,
-    UUID expediteurUuid,
-    UUID destinataireUuid,
     String contenu,
     LocalDateTime dateEnvoi,
-    boolean lu
+    LocalDateTime dateReception,
+    boolean lu,
+    UUID expediteurUuid,
+    UUID destinataireUuid
 
-) {
-}
+) {}

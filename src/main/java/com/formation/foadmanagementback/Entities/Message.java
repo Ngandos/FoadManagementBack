@@ -22,19 +22,21 @@ public class Message {
     @Column(nullable = false, unique = true, updatable = false)
     private UUID uuid;
 
-    @ManyToOne
-    @JoinColumn(name = "expediteur_id", nullable = false)
-    private Etudiant expediteur;
+    @Column(nullable = false)
+    private LocalDateTime dateEnvoi;
 
-    @ManyToOne
-    @JoinColumn(name = "destinataire_id", nullable = false)
-    private Etudiant destinataire;
+    private LocalDateTime dateReception;
 
     @Column(nullable = false, length = 1000)
     private String contenu;
 
-    @Column(nullable = false)
-    private LocalDateTime dateEnvoi;
+    @ManyToOne
+    @JoinColumn(name = "expediteur_id", nullable = false)
+    private User expediteur;
+
+    @ManyToOne
+    @JoinColumn(name = "destinataire_id", nullable = false)
+    private User destinataire;
 
     @Column(nullable = false)
     private boolean lu;

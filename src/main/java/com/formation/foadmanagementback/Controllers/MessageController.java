@@ -2,7 +2,7 @@ package com.formation.foadmanagementback.Controllers;
 
 import com.formation.foadmanagementback.DTO.Message.MessageCreateDTO;
 import com.formation.foadmanagementback.DTO.Message.MessageDTO;
-import com.formation.foadmanagementback.Services.Abstracts.IMessageService;
+import com.formation.foadmanagementback.Services.Abstracts.IMessagesServ;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,27 +17,27 @@ import java.util.UUID;
 @SecurityRequirement(name = "BearerAuth")
 public class MessageController {
 
-    private final IMessageService iMessageService;
+    private final IMessagesServ iMessagesServ;
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'FORMATEUR')")
     public MessageDTO sendMessage(@RequestBody MessageCreateDTO dto) {
-        return iMessageService.sendMessage(dto);
+        return iMessagesServ.sendMessage(dto);
     }
 
     @GetMapping("/{uuid}")
     public MessageDTO getMessageByUuid(@PathVariable UUID uuid) {
-        return iMessageService.getByUuid(uuid);
+        return iMessagesServ.getByUuid(uuid);
     }
 
     @GetMapping("/sent/{uuid}")
     public List<MessageDTO> getMessagesSent(@PathVariable UUID uuid) {
-        return iMessageService.getAllMessagesSent(uuid);
+        return iMessagesServ.getAllMessagesSent(uuid);
     }
 
     @GetMapping("/received/{uuid}")
     public List<MessageDTO> getMessagesReceived(@PathVariable UUID uuid) {
-        return iMessageService.getAllMessagesReceived(uuid);
+        return iMessagesServ.getAllMessagesReceived(uuid);
     }
 
     @GetMapping("/conversation")
@@ -45,12 +45,12 @@ public class MessageController {
             @RequestParam UUID expediteurUuid,
             @RequestParam UUID destinataireUuid
     ) {
-        return iMessageService.getConversation(expediteurUuid, destinataireUuid);
+        return iMessagesServ.getConversation(expediteurUuid, destinataireUuid);
     }
 
     @PatchMapping("/{uuid}/lu")
     public void marquerCommeLu(@PathVariable UUID uuid) {
-        iMessageService.marquerCommeLu(uuid);
+        iMessagesServ.marquerCommeLu(uuid);
     }
 
 }

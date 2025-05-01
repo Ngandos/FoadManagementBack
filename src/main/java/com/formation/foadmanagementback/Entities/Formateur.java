@@ -23,10 +23,10 @@ public class Formateur {
       private String prenom;
       private String email;
       private String expertise;
-      @OneToOne
-      @JoinColumn(name = "user_id")
-      private User user;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @PrePersist
       public void generateUuid() {

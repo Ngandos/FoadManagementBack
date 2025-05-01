@@ -27,7 +27,7 @@ public class Etudiant {
     private String email;
     private String telephone;
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @PrePersist

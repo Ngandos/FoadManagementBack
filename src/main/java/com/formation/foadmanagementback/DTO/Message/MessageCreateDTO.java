@@ -4,9 +4,8 @@ import java.util.UUID;
 
 public record MessageCreateDTO(
 
+    String contenu,
     UUID expediteurUuid,
-    UUID destinataireUuid,
-    String contenu
+    UUID destinataireUuid
 
-) {
-}
+) {}
